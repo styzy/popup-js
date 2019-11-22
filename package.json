@@ -1,7 +1,13 @@
 {
-    "name": "es7-plugin",
-    "version": "0.0.0",
-    "description": "es7-plugin",
+    "name": "@styzy/popup-js",
+    "version": "0.0.1",
+    "description": "popup-js",
+    "keywords": [
+        "popup",
+        "dialog",
+        "confirm",
+        "toast"
+    ],
     "scripts": {
         "dev": "webpack-dev-server --mode=development --open --hot",
         "build": "webpack --mode=production"
@@ -11,17 +17,21 @@
         "email": "styzyreal@126.com",
         "url": "https://our.styzy.cn"
     },
-    "main": "dist/plugin-name.js",
+    "main": "dist/popup.js",
     "devDependencies": {
         "@babel/cli": "^7.6.4",
         "@babel/core": "^7.6.4",
+        "@babel/plugin-proposal-class-properties": "^7.7.0",
+        "@babel/plugin-proposal-private-methods": "^7.6.0",
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/plugin-transform-modules-commonjs": "^7.6.0",
         "@babel/plugin-transform-runtime": "^7.6.2",
         "@babel/preset-env": "^7.6.3",
+        "@styzy/utils-configuration-sync": "0.0.1",
         "autoprefixer": "^9.6.1",
         "babel-loader": "^8.0.6",
         "css-loader": "^3.0.0",
+        "file-loader": "^4.2.0",
         "html-webpack-plugin": "^3.2.0",
         "mini-css-extract-plugin": "^0.8.0",
         "postcss-loader": "^3.0.0",

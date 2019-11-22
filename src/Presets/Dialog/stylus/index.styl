@@ -1,0 +1,47 @@
+@import './iconfont.styl'
+.popup-dialog
+	height 100%
+	background-color #FFFFFF
+	border-radius 2px
+	overflow hidden
+	box-shadow 1px 1px 50px 0 rgba(0, 0, 0, 0.3)
+.popup-dialog-header
+	position relative
+	height 40px
+	box-sizing border-box
+	background-color #EEEEEE
+	box-shadow 0 -3px 5px 0 #000000
+.popup-dialog-title
+	height 100%
+	padding 0 40px 0 20px
+	line-height 40px
+	font-size 14px
+	white-space nowrap
+	text-overflow ellipsis
+	overflow hidden
+.popup-dialog-close
+	position absolute
+	top 0
+	right 0
+	width 40px
+	height 40px
+	text-align center
+	line-height 40px
+	cursor pointer
+	transition 0.3s
+	i.popup-dialog-iconfont
+		color #999999
+		transition 0.3s
+	&:hover
+		background-color #ff4444
+		i.popup-dialog-iconfont
+			color #FFFFFF
+.popup-dialog-body
+	height calc(100% - 40px)
+	overflow-y auto
+	iframe
+		display block
+		width 100%
+		height 100%
+		border 0
+		box-sizing border-box

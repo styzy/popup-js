@@ -1,0 +1,83 @@
+@import './color.styl'
+.popup-message
+	max-width 300px
+	padding 10px 20px
+	margin 20px
+	font-size 14px
+	line-height 20px
+	border-radius 4px
+	border 1px solid transparent
+	word-break break-all
+	box-sizing border-box
+.popup-message-info
+	color #FFFFFF
+	background-color color-info
+	border-color color-info - #111111
+.popup-message-success
+	color #FFFFFF
+	background-color color-success
+	border-color color-success - #222222
+.popup-message-warning
+	color #FFFFFF
+	background-color color-warning
+	border-color color-warning - #111111
+.popup-message-error
+	color #FFFFFF
+	background-color color-error
+	border-color color-error - #111111
+.popup-message-animate-top-in
+	animation topIn 0.3s linear
+	@keyframes topIn
+		from
+			transform translateY(-100px)
+		to
+			transform translateY(0px)
+.popup-message-animate-top-out
+	animation topOut 0.3s linear
+	@keyframes topOut
+		from
+			transform translateY(0px)
+		to
+			transform translateY(-100px)
+.popup-message-animate-left-in
+	animation leftIn 0.3s linear
+	@keyframes leftIn
+		from
+			transform translateX(-100px)
+		to
+			transform translateX(0px)
+.popup-message-animate-left-out
+	animation leftOut 0.3s linear
+	@keyframes leftOut
+		from
+			transform translateX(0px)
+		to
+			transform translateX(-100px)
+.popup-message-animate-right-in
+	animation rightIn 0.3s linear
+	@keyframes rightIn
+		from
+			transform translateX(100px)
+		to
+			transform translateX(0px)
+.popup-message-animate-right-out
+	animation rightOut 0.3s linear
+	@keyframes rightOut
+		from
+			transform translateX(0px)
+		to
+			transform translateX(100px)
+.popup-message-animate-bottom-in
+	animation bottomIn 0.3s linear
+	@keyframes bottomIn
+		from
+			transform translateY(100px)
+		to
+			transform translateY(0px)
+.popup-message-animate-bottom-out
+	animation bottomOut 0.3s linear
+	@keyframes bottomOut
+		from
+			transform translateY(0px)
+		to
+			transform translateY(100px)
