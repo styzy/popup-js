@@ -26,6 +26,30 @@ const rules = {
         default: GLOBAL_CONSTANTS.ANCHOR.CENTER,
         type: String
     },
+    width: {
+        default: 'auto',
+        type: [String, Number]
+    },
+    height: {
+        default: 'auto',
+        type: [String, Number]
+    },
+    minWidth: {
+        default: 300,
+        type: [String, Number]
+    },
+    minHeight: {
+        default: 'none',
+        type: [String, Number]
+    },
+    maxWidth: {
+        default: 400,
+        type: [String, Number]
+    },
+    maxHeight: {
+        default: 'none',
+        type: [String, Number]
+    },
     autoClose: {
         default: true,
         type: Boolean

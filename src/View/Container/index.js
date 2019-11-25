@@ -39,6 +39,20 @@ class Container extends SuperView {
             el.style.minHeight = this.config.minHeight
         }
 
+        if (typeof this.config.maxWidth === 'number') {
+            el.style.maxWidth = `${this.config.maxWidth}px`
+        }
+        if (typeof this.config.maxWidth === 'string') {
+            el.style.maxWidth = this.config.maxWidth
+        }
+
+        if (typeof this.config.maxHeight === 'number') {
+            el.style.maxHeight = `${this.config.maxHeight}px`
+        }
+        if (typeof this.config.maxHeight === 'string') {
+            el.style.maxHeight = this.config.maxHeight
+        }
+
         if (typeof this.config.width === 'number') {
             el.style.width = `${this.config.width}px`
         }
@@ -57,26 +71,23 @@ class Container extends SuperView {
     }
     resize(size) {
         let el = this.#el,
-            minWidth = parseFloat(window.getComputedStyle(this.#el)['minWidth']) || 0,
-            minHeight = parseFloat(window.getComputedStyle(this.#el)['minHeight']) || 0,
-            maxWidth = window.innerWidth,
-            maxHeight = window.innerHeight,
-            width = size && size.width ? size.width : parseFloat(window.getComputedStyle(this.#el)['width']),
-            height = size && size.height ? size.height : parseFloat(window.getComputedStyle(this.#el)['height'])
+            rootFontSize = parseFloat(window.getComputedStyle(document.documentElement)['font-size']),
+            winWidth = window.innerWidth,
+            winHeight = window.innerHeight,
+            computedStyle = window.getComputedStyle(this.#el),
+            minWidth = getPX(computedStyle['minWidth'], rootFontSize, winWidth) || 0,
+            minHeight = getPX(computedStyle['minHeight'], rootFontSize, winHeight) || 0,
+            maxWidth = getPX(computedStyle['maxWidth'], rootFontSize, winWidth) || window.innerWidth,
+            maxHeight = getPX(computedStyle['maxHeight'], rootFontSize, winHeight) || window.innerHeight,
+            width = size && size.width ? size.width : getPX(computedStyle['width'], rootFontSize, winWidth),
+            height = size && size.height ? size.height : getPX(computedStyle['height'], rootFontSize, winHeight)
 
-        if (width > maxWidth) {
-            width = maxWidth
-        }
-        if (width < minWidth) {
-            width = minWidth
-        }
-
-        if (height > maxHeight) {
-            height = maxHeight
-        }
-        if (height < minHeight) {
-            height = minHeight
-        }
+        console.log('size: ', size)
+        console.log('height: ', height)
+        console.log('minHeight: ', minHeight)
+        console.log('maxHeight: ', maxHeight)
+        width = Math.max(minWidth, Math.min(width, maxWidth))
+        height = Math.max(minHeight, Math.min(height, maxHeight))
 
         el.style.width = `${width}px`
         el.style.height = `${height}px`
@@ -130,6 +141,17 @@ class Container extends SuperView {
                 el.style.marginTop = `-${height / 2}px`
                 el.style.marginLeft = `-${width / 2}px`
                 break
+        }
+
+        function getPX(string, rootFontSize, winPX) {
+            if (string.indexOf('%') !== -1) {
+                let percent = parseFloat(string)
+                return (winPX * percent) / 100
+            }
+            if (string.indexOf('em') !== -1) {
+                return parseFloat(string) * rootFontSize
+            }
+            return parseFloat(string)
         }
     }
     render() {

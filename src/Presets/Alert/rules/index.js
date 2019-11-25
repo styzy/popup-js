@@ -1,25 +1,22 @@
 import GLOBAL_CONSTANTS from '../../../CONSTANTS'
+import CONSTANTS from '../CONSTANTS'
 
 const rules = {
     title: {
-        default: '',
-        type: [Boolean, String, HTMLElement, Function]
+        default: CONSTANTS.TEXT.TITLE,
+        type: [Boolean, String, HTMLElement]
     },
-    closeButton: {
-        default: true,
-        type: [Boolean, String, HTMLElement, Function]
+    content: {
+        default: '',
+        type: [String, HTMLElement]
+    },
+    button: {
+        default: CONSTANTS.TEXT.BUTTON,
+        type: [String, HTMLElement]
     },
     marker: {
         default: true,
         type: [Boolean, Object]
-    },
-    content: {
-        default: '',
-        type: [String, HTMLElement, Function]
-    },
-    url: {
-        default: '',
-        type: [String, URL]
     },
     anchor: {
         default: GLOBAL_CONSTANTS.ANCHOR.CENTER,
@@ -34,30 +31,30 @@ const rules = {
         type: [String, Number]
     },
     minWidth: {
-        default: 400,
-        type: [String, Number]
+        default: 300,
+        type: Number
     },
     minHeight: {
-        default: 400,
-        type: [String, Number]
+        default: 160,
+        type: Number
     },
     maxWidth: {
-        default: 'none',
-        type: [String, Number]
+        default: 600,
+        type: Number
     },
     maxHeight: {
-        default: 'none',
-        type: [String, Number]
+        default: 600,
+        type: Number
     },
     onSuccess: {
         default: null,
         type: Function
     },
-    onClose: {
+    beforeClose: {
         default: null,
         type: Function
     },
-    beforeClose: {
+    onClose: {
         default: null,
         type: Function
     }

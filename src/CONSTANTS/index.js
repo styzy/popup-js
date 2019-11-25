@@ -8,7 +8,8 @@ const CONSTANTS = {
         FADE_OUT: 'popup-fade-out',
         MARKER: 'popup-marker',
         CONTAINER: 'popup-container',
-        CONTENT: 'popup-content'
+        CONTENT: 'popup-content',
+        ICONFONT: 'popup-iconfont'
     },
     ANCHOR: {
         CENTER: 'center',

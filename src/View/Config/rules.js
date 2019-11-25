@@ -16,11 +16,19 @@ const config = {
         type: [String, Number]
     },
     minWidth: {
-        default: 'auto',
+        default: 'none',
         type: [String, Number]
     },
     minHeight: {
-        default: 'auto',
+        default: 'none',
+        type: [String, Number]
+    },
+    maxWidth: {
+        default: 'none',
+        type: [String, Number]
+    },
+    maxHeight: {
+        default: 'none',
         type: [String, Number]
     },
     anchor: {

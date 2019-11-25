@@ -1,0 +1,50 @@
+@import './color.styl'
+.popup-alert
+	height 100%
+	border-radius 2px
+	box-shadow 1px 1px 50px 0 rgba(0, 0, 0, 0.3)
+	background-color #FFFFFF
+	overflow hidden
+.popup-alert-header
+	height 44px
+	box-sizing border-box
+	background-color #F8F8F8
+	// box-shadow 0 -3px 5px 0 #000000
+	border-bottom 1px solid #EEEEEE
+.popup-alert-title
+	height 100%
+	padding 0 20px
+	line-height 44px
+	font-size 14px
+	white-space nowrap
+	text-overflow ellipsis
+	overflow hidden
+.popup-alert-body
+	height calc(100% - 104px)
+	padding 20px
+	word-break break-all
+	box-sizing border-box
+	font-size 14px
+	overflow-x hidden
+	overflow-y auto
+.popup-alert-footer
+	height 60px
+	box-sizing border-box
+	// border-top 1px solid #EEEEEE
+	text-align right
+.popup-alert-button
+	height 36px
+	margin 12px
+	padding 0 20px
+	line-height 36px
+	border none
+	border-radius 2px
+	outline none
+	color #FFFFFF
+	font-size 14px
+	background-color color-button
+	cursor pointer
+	&:hover
+		background-color color-button + #111111
+	&:active, &:focus
+		background-color color-button - #111111

@@ -13,7 +13,7 @@
             text-align: center;
         }
 
-        button {
+        .demo button {
             width: 100px;
             height: 50px;
             padding: 0;
@@ -27,9 +27,11 @@
 <body>
     <div class="demo">
         <h3>基础</h3>
-        <button type="button" onclick="openDefault()">open</button>
+        <button type="button" onclick="_open()">open</button>
         <h3>message</h3>
         <button type="button" onclick="message()">message</button>
+        <h3>alert</h3>
+        <button type="button" onclick="_alert()">alert</button>
         <h3>dialog</h3>
         <button type="button" onclick="dialog()">dialog</button>
     </div>
@@ -44,34 +46,34 @@
             window.popup = new Popup({
                 devMode: true
             })
-            console.log('popup: ', popup)
-            window.openDefault = function() {
+            window._open = function() {
                 popup.open({
                     // marker: false,
                     marker: {
                         onClick: function(event, id) {
-                            console.log('this: ', this)
-                            console.log('event: ', event)
-                            console.log('id: ', id)
+                            // console.log('this: ', this)
+                            // console.log('event: ', event)
+                            // console.log('id: ', id)
                         },
                         clickCloseEnable: true
                     },
                     onSuccess: function(id, el) {
-                        console.log('id: ', id)
-                        console.log('el: ', el)
+                        // console.log('id: ', id)
+                        // console.log('el: ', el)
                     },
                     // beforeClose: function(id) {
                     //     console.log('id: ', id);
                     //     return false
                     // },
                     onClose: function(id) {
-                        console.log('id: ', id)
+                        // console.log('id: ', id)
                     }
                     // autoClose: true,
                     // autoCloseDelay: 2000
                 })
                 console.log('dev tools', popupDevData)
             }
+
             window.message = function() {
                 // popup.message({
                 //     message: '这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息',
@@ -88,14 +90,24 @@
                 })
                 // popup.message.success('这是一条warning')
             }
+
+            window._alert = function() {
+                popup.alert({
+                    title: '提示',
+                    content: '这是一条提示信息'
+                    // content: '<div style="height:400px;"></div>'
+                    // content: '1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
+                })
+            }
+
             window.dialog = function() {
                 popup.dialog({
                     title: '标题',
-                    // url: '/',
+                    url: '/',
                     // url: 'http://baidu.com',
-                    url: 'http://127.0.0.1:5502/',
-                    // content: '<a href="#">link</a>',
-                    content: document.querySelector('button'),
+                    // url: 'http://127.0.0.1:5502/',
+                    // content: '<div style="height:800px;">link</div>',
+                    // content: document.querySelector('button'),
                     onSuccess: function(id, el) {
                         // console.log('id: ', id);
                         // console.log('el: ', el);
@@ -106,7 +118,7 @@
                         return true
                     },
                     onClose: function(id) {
-                        console.log('id: ', id)
+                        // console.log('id: ', id)
                     }
                 })
             }

@@ -25,7 +25,7 @@ class Content {
             el = content({ close, resize: this.container.resize.bind(this.container) })
         } else {
             if (isHTMLElement(content)) {
-                el = content
+                el = content.cloneNode(true)
             } else {
                 el = document.createElement('div')
                 el.classList.add(CONSTANTS.CLASS_NAME.CONTENT)

@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '../../CONSTANTS'
 import CONSTANTS from './CONSTANTS'
 import Config from '../Config'
 import rules from './rules'
@@ -27,21 +28,20 @@ const install = ({ globalConfig, open, close }) => {
         const render = ({ close, resize }) => {
             containerResize = resize
             let el = document.createElement('div'),
-                el_body = document.createElement('div')
+                el_body = document.createElement('div'),
+                el_header = document.createElement('div')
             el.classList.add(CONSTANTS.CLASS_NAME.DIALOG)
             el_body.classList.add(CONSTANTS.CLASS_NAME.BODY)
+            el_header.classList.add(CONSTANTS.CLASS_NAME.HEADER)
 
             if (pluginConfig.title !== false) {
-                let el_header = document.createElement('div'),
-                    el_title = document.createElement('div')
-
-                el_header.classList.add(CONSTANTS.CLASS_NAME.HEADER)
+                let el_title = document.createElement('div')
                 el_title.classList.add(CONSTANTS.CLASS_NAME.TITLE)
 
                 if (pluginConfig.title instanceof Function) {
                     el_title.appendChild(pluginConfig.title())
                 } else if (isHTMLElement(pluginConfig.title)) {
-                    el_title.appendChild(pluginConfig.title)
+                    el_title.appendChild(pluginConfig.title.cloneNode(true))
                 } else {
                     el_title.innerHTML = pluginConfig.title
                 }
@@ -53,6 +53,7 @@ const install = ({ globalConfig, open, close }) => {
 
                     if (pluginConfig.closeButton === true) {
                         let el_close_i = document.createElement('i')
+                        el_close_i.classList.add(GLOBAL_CONSTANTS.CLASS_NAME.ICONFONT)
                         el_close_i.classList.add(CONSTANTS.CLASS_NAME.ICONFONT)
                         el_close_i.classList.add('close')
                         el_close.appendChild(el_close_i)
@@ -88,8 +89,7 @@ const install = ({ globalConfig, open, close }) => {
                     el_body.appendChild(el_content)
                 }
                 if (isHTMLElement(pluginConfig.content)) {
-                    let el_content = pluginConfig.content.cloneNode(true)
-                    el_body.appendChild(el_content)
+                    el_body.appendChild(pluginConfig.content.cloneNode(true))
                 }
                 if (typeof pluginConfig.content === 'string') {
                     el_body.innerHTML = pluginConfig.content
@@ -177,6 +177,8 @@ const install = ({ globalConfig, open, close }) => {
             height: pluginConfig.height,
             minWidth: pluginConfig.minWidth,
             minHeight: pluginConfig.minHeight,
+            maxWidth: pluginConfig.maxWidth,
+            maxHeight: pluginConfig.maxHeight,
             onSuccess: onSuccess,
             beforeClose: beforeClose,
             onClose: onClose

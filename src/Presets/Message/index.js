@@ -39,6 +39,12 @@ const install = ({ globalConfig, open, close }) => {
             },
             marker: pluginConfig.marker,
             anchor: pluginConfig.anchor,
+            width: pluginConfig.width,
+            height: pluginConfig.height,
+            minWidth: pluginConfig.minWidth,
+            minHeight: pluginConfig.minHeight,
+            maxWidth: pluginConfig.maxWidth,
+            maxHeight: pluginConfig.maxHeight,
             autoClose: pluginConfig.autoClose,
             autoCloseDelay: pluginConfig.autoCloseDelay,
             onClose: () => {
