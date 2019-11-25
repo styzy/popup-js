@@ -1,5 +1,5 @@
 import { configRules, markerRules, contentRules } from './rules'
-import sync from '@styzy/utils-configuration-sync'
+import { sync } from '../../util'
 
 class Config {
     constructor(customConfig) {

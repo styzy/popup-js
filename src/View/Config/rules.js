@@ -15,6 +15,14 @@ const config = {
         default: 'auto',
         type: [String, Number]
     },
+    minWidth: {
+        default: 'auto',
+        type: [String, Number]
+    },
+    minHeight: {
+        default: 'auto',
+        type: [String, Number]
+    },
     anchor: {
         default: 'center',
         type: String

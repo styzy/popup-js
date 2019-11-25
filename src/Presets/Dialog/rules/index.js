@@ -32,11 +32,11 @@ const rules = {
         type: [String, Number]
     },
     minWidth: {
-        default: 500,
+        default: 400,
         type: Number
     },
     minHeight: {
-        default: 500,
+        default: 400,
         type: Number
     },
     onSuccess: {

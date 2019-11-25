@@ -1,4 +1,5 @@
 import CONSTANTS from '../../../CONSTANTS'
+import { isHTMLElement } from '../../../util'
 
 class Content {
     viewId
@@ -23,7 +24,7 @@ class Content {
         if (content instanceof Function) {
             el = content({ close, resize: this.container.resize.bind(this.container) })
         } else {
-            if (content instanceof HTMLElement) {
+            if (isHTMLElement(content)) {
                 el = content
             } else {
                 el = document.createElement('div')

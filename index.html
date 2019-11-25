@@ -1,114 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>
-            <%= htmlWebpackPlugin.options.title %>
-        </title>
-        <style>
-            .demo {
-                text-align: center;
-            }
 
-            button {
-                width: 100px;
-                height: 50px;
-                padding: 0;
-                line-height: 46px;
-                font-size: 14px;
-                box-sizing: border-box;
-            }
-        </style>
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+    <style>
+        .demo {
+            text-align: center;
+        }
 
-    <body>
-        <div class="demo">
-            <h3>基础</h3>
-            <button type="button" onclick="openDefault()">open</button>
-            <h3>message</h3>
-            <button type="button" onclick="message()">message</button>
-            <h3>dialog</h3>
-            <button type="button" onclick="dialog()">dialog</button>
-        </div>
-        <script type="text/javascript">
-            ;(function() {
-                // Popup.plugins({
-                //     name: 'test',
-                //     parser: function() {
+        button {
+            width: 100px;
+            height: 50px;
+            padding: 0;
+            line-height: 46px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
 
-                //     }
-                // })
-                window.popup = new Popup({
-                    devMode: true
+<body>
+    <div class="demo">
+        <h3>基础</h3>
+        <button type="button" onclick="openDefault()">open</button>
+        <h3>message</h3>
+        <button type="button" onclick="message()">message</button>
+        <h3>dialog</h3>
+        <button type="button" onclick="dialog()">dialog</button>
+    </div>
+    <script type="text/javascript">
+        (function() {
+            // Popup.plugins({
+            //     name: 'test',
+            //     parser: function() {
+
+            //     }
+            // })
+            window.popup = new Popup({
+                devMode: true
+            })
+            console.log('popup: ', popup)
+            window.openDefault = function() {
+                popup.open({
+                    // marker: false,
+                    marker: {
+                        onClick: function(event, id) {
+                            console.log('this: ', this)
+                            console.log('event: ', event)
+                            console.log('id: ', id)
+                        },
+                        clickCloseEnable: true
+                    },
+                    onSuccess: function(id, el) {
+                        console.log('id: ', id)
+                        console.log('el: ', el)
+                    },
+                    // beforeClose: function(id) {
+                    //     console.log('id: ', id);
+                    //     return false
+                    // },
+                    onClose: function(id) {
+                        console.log('id: ', id)
+                    }
+                    // autoClose: true,
+                    // autoCloseDelay: 2000
                 })
-                console.log('popup: ', popup)
-                window.openDefault = function() {
-                    popup.open({
-                        // marker: false,
-                        marker: {
-                            onClick: function(event, id) {
-                                console.log('this: ', this)
-                                console.log('event: ', event)
-                                console.log('id: ', id)
-                            },
-                            clickCloseEnable: true
-                        },
-                        onSuccess: function(id, el) {
-                            console.log('id: ', id)
-                            console.log('el: ', el)
-                        },
-                        // beforeClose: function(id) {
-                        //     console.log('id: ', id);
-                        //     return false
-                        // },
-                        onClose: function(id) {
-                            console.log('id: ', id)
-                        }
-                        // autoClose: true,
-                        // autoCloseDelay: 2000
-                    })
-                    console.log('dev tools', popupDevData)
-                }
-                window.message = function() {
-                    // popup.message({
-                    //     message: '这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息',
-                    //     type: 'warning',
-                    //     anchor: 'center',
-                    //     autoClose: false
-                    // })
-                    popup.message({
-                        message: '这是一条warning这是一条wing',
-                        type: 'success',
-                        anchor: 'top'
-                        // marker: true,
-                        // autoClose: false
-                    })
-                    // popup.message.success('这是一条warning')
-                }
-                window.dialog = function() {
-                    popup.dialog({
-                        title: '标题',
-                        url: '/',
-                        // url: 'http://baidu.com',
-                        // content: '<a href="#">link</a>',
-                        content: document.querySelector('button'),
-                        onSuccess: function(id, el) {
-                            // console.log('id: ', id);
-                            // console.log('el: ', el);
-                        },
-                        beforeClose: function(id, el) {
-                            // console.log('id: ', id);
-                            // console.log('el: ', el);
-                            return true
-                        },
-                        onClose: function(id) {
-                            console.log('id: ', id)
-                        }
-                    })
-                }
-            })()
-        </script>
-    </body>
+                console.log('dev tools', popupDevData)
+            }
+            window.message = function() {
+                // popup.message({
+                //     message: '这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息这是一条成功信息',
+                //     type: 'warning',
+                //     anchor: 'center',
+                //     autoClose: false
+                // })
+                popup.message({
+                    message: '这是一条warning这是一条wing',
+                    type: 'success',
+                    anchor: 'top'
+                    // marker: true,
+                    // autoClose: false
+                })
+                // popup.message.success('这是一条warning')
+            }
+            window.dialog = function() {
+                popup.dialog({
+                    title: '标题',
+                    // url: '/',
+                    // url: 'http://baidu.com',
+                    url: 'http://127.0.0.1:5502/',
+                    // content: '<a href="#">link</a>',
+                    content: document.querySelector('button'),
+                    onSuccess: function(id, el) {
+                        // console.log('id: ', id);
+                        // console.log('el: ', el);
+                    },
+                    beforeClose: function(id, el) {
+                        // console.log('id: ', id);
+                        // console.log('el: ', el);
+                        return true
+                    },
+                    onClose: function(id) {
+                        console.log('id: ', id)
+                    }
+                })
+            }
+        })()
+    </script>
+</body>
+
 </html>

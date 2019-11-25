@@ -27,7 +27,7 @@
         "@babel/plugin-transform-modules-commonjs": "^7.6.0",
         "@babel/plugin-transform-runtime": "^7.6.2",
         "@babel/preset-env": "^7.6.3",
-        "@styzy/utils-configuration-sync": "0.0.1",
+        "@styzy/utils-configuration-sync": "^1.0.1",
         "autoprefixer": "^9.6.1",
         "babel-loader": "^8.0.6",
         "css-loader": "^3.0.0",

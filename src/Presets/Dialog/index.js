@@ -1,7 +1,7 @@
-import GLOBAL_CONSTANTS from '../../CONSTANTS'
 import CONSTANTS from './CONSTANTS'
 import Config from '../Config'
 import rules from './rules'
+import { isHTMLElement } from '../../util'
 import { isCrossOrigin } from './util'
 import './stylus/index.styl'
 
@@ -24,13 +24,6 @@ const install = ({ globalConfig, open, close }) => {
             pluginConfig.content = false
         }
 
-        if (pluginConfig.width === 'auto') {
-            pluginConfig.width = pluginConfig.minWidth
-        }
-        if (pluginConfig.height === 'auto') {
-            pluginConfig.height = pluginConfig.minHeight
-        }
-
         const render = ({ close, resize }) => {
             containerResize = resize
             let el = document.createElement('div'),
@@ -47,7 +40,7 @@ const install = ({ globalConfig, open, close }) => {
 
                 if (pluginConfig.title instanceof Function) {
                     el_title.appendChild(pluginConfig.title())
-                } else if (pluginConfig.title instanceof HTMLElement) {
+                } else if (isHTMLElement(pluginConfig.title)) {
                     el_title.appendChild(pluginConfig.title)
                 } else {
                     el_title.innerHTML = pluginConfig.title
@@ -94,7 +87,7 @@ const install = ({ globalConfig, open, close }) => {
                     let el_content = pluginConfig.content(close, el_body)
                     el_body.appendChild(el_content)
                 }
-                if (pluginConfig.content instanceof HTMLElement) {
+                if (isHTMLElement(pluginConfig.content)) {
                     let el_content = pluginConfig.content.cloneNode(true)
                     el_body.appendChild(el_content)
                 }
@@ -110,14 +103,11 @@ const install = ({ globalConfig, open, close }) => {
         }
 
         function iframeLoadHandler() {
+            this.removeEventListener('load', iframeLoadHandler)
             if (pluginConfig.width !== 'auto' && pluginConfig.height !== 'auto') {
                 return false
             }
             if (isCrossOrigin(this)) {
-                containerResize({
-                    width: window.innerWidth / 2,
-                    height: window.innerHeight / 2
-                })
                 return false
             }
             let iframeSize = getIframeSize(this),
@@ -185,6 +175,8 @@ const install = ({ globalConfig, open, close }) => {
             anchor: pluginConfig.anchor,
             width: pluginConfig.width,
             height: pluginConfig.height,
+            minWidth: pluginConfig.minWidth,
+            minHeight: pluginConfig.minHeight,
             onSuccess: onSuccess,
             beforeClose: beforeClose,
             onClose: onClose

@@ -25,6 +25,20 @@ class Container extends SuperView {
         el.classList.add(CONSTONTS.CLASS_NAME.CONTAINER)
         el.style.zIndex = this.zIndex
 
+        if (typeof this.config.minWidth === 'number') {
+            el.style.minWidth = `${this.config.minWidth}px`
+        }
+        if (typeof this.config.minWidth === 'string') {
+            el.style.minWidth = this.config.minWidth
+        }
+
+        if (typeof this.config.minHeight === 'number') {
+            el.style.minHeight = `${this.config.minHeight}px`
+        }
+        if (typeof this.config.minHeight === 'string') {
+            el.style.minHeight = this.config.minHeight
+        }
+
         if (typeof this.config.width === 'number') {
             el.style.width = `${this.config.width}px`
         }
@@ -43,17 +57,25 @@ class Container extends SuperView {
     }
     resize(size) {
         let el = this.#el,
-            winWidth = window.innerWidth,
-            winHeight = window.innerHeight,
+            minWidth = parseFloat(window.getComputedStyle(this.#el)['minWidth']) || 0,
+            minHeight = parseFloat(window.getComputedStyle(this.#el)['minHeight']) || 0,
+            maxWidth = window.innerWidth,
+            maxHeight = window.innerHeight,
             width = size && size.width ? size.width : parseFloat(window.getComputedStyle(this.#el)['width']),
             height = size && size.height ? size.height : parseFloat(window.getComputedStyle(this.#el)['height'])
 
-        if (width > winWidth) {
-            width = winWidth
+        if (width > maxWidth) {
+            width = maxWidth
+        }
+        if (width < minWidth) {
+            width = minWidth
         }
 
-        if (height > winHeight) {
-            height = winHeight
+        if (height > maxHeight) {
+            height = maxHeight
+        }
+        if (height < minHeight) {
+            height = minHeight
         }
 
         el.style.width = `${width}px`

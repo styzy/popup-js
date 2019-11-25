@@ -1,5 +1,5 @@
 import rules from './rules'
-import sync from '@styzy/utils-configuration-sync'
+import { sync } from '../../util'
 
 class Plugin {
     #name
