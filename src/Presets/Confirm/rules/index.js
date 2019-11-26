@@ -10,8 +10,12 @@ const rules = {
         default: '',
         type: [String, HTMLElement]
     },
-    button: {
-        default: CONSTANTS.TEXT.BUTTON,
+    button_yes: {
+        default: CONSTANTS.TEXT.BUTTON_YES,
+        type: [String, HTMLElement]
+    },
+    button_no: {
+        default: CONSTANTS.TEXT.BUTTON_NO,
         type: [String, HTMLElement]
     },
     anchor: {

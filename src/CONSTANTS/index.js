@@ -9,7 +9,9 @@ const CONSTANTS = {
         MARKER: 'popup-marker',
         CONTAINER: 'popup-container',
         CONTENT: 'popup-content',
-        ICONFONT: 'popup-iconfont'
+        ICONFONT: 'popup-iconfont',
+        ICONFONT_CLOSE: 'popup-iconfont-close',
+        ICONFONT_LOADING: 'popup-iconfont-loading'
     },
     ANCHOR: {
         CENTER: 'center',

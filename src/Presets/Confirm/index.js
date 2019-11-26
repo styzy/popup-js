@@ -5,14 +5,15 @@ import { isHTMLElement } from '../../util'
 import './stylus/index.styl'
 
 const install = ({ globalConfig, open, close }) => {
-    const alert = customConfig => {
+    const confirm = customConfig => {
         if (typeof customConfig === 'string') {
             customConfig = {
                 content: customConfig
             }
         }
 
-        let pluginConfig = new Config(rules, customConfig)
+        let pluginConfig = new Config(rules, customConfig),
+            result = false
 
         if (pluginConfig.title === true) {
             pluginConfig.title = ''
@@ -23,8 +24,8 @@ const install = ({ globalConfig, open, close }) => {
                 el_header = document.createElement('div'),
                 el_body = document.createElement('div'),
                 el_footer = document.createElement('div')
+            el.classList.add(CONSTANTS.CLASS_NAME.CONFIRM)
             el_header.classList.add(CONSTANTS.CLASS_NAME.HEADER)
-            el.classList.add(CONSTANTS.CLASS_NAME.ALERT)
             el_body.classList.add(CONSTANTS.CLASS_NAME.BODY)
             el_footer.classList.add(CONSTANTS.CLASS_NAME.FOOTER)
 
@@ -54,20 +55,42 @@ const install = ({ globalConfig, open, close }) => {
             }
             el.appendChild(el_body)
 
-            let el_button = document.createElement('button')
-            el_button.classList.add(CONSTANTS.CLASS_NAME.BUTTON)
-            el_button.type = 'button'
-            el_button.addEventListener('click', close)
-            if (isHTMLElement(pluginConfig.button)) {
-                el_button.appendChild(pluginConfig.button.cloneNode(true))
-            }
-            if (typeof pluginConfig.button === 'string') {
-                el_button.innerHTML = pluginConfig.button
-            }
-            el_footer.appendChild(el_button)
+            let el_button_yes = createButton(pluginConfig.button_yes, false)
+            el_button_yes.addEventListener('click', () => {
+                result = true
+                close()
+            })
+            el_footer.appendChild(el_button_yes)
+
+            let el_button_no = createButton(pluginConfig.button_no, true)
+            el_button_no.addEventListener('click', close)
+            el_footer.appendChild(el_button_no)
+
             el.appendChild(el_footer)
 
             return el
+
+            function createButton(button, isPlain) {
+                let el_button = document.createElement('button')
+                el_button.classList.add(CONSTANTS.CLASS_NAME.BUTTON)
+                if (isPlain) {
+                    el_button.classList.add(CONSTANTS.CLASS_NAME.BUTTON_PLAIN)
+                }
+                el_button.type = 'button'
+                if (isHTMLElement(button)) {
+                    el_button.appendChild(button.cloneNode(true))
+                }
+                if (typeof button === 'string') {
+                    el_button.innerHTML = button
+                }
+                return el_button
+            }
+        }
+
+        const onClose = id => {
+            if (pluginConfig.onClose) {
+                pluginConfig.onClose(result, id)
+            }
         }
 
         let config = {
@@ -82,7 +105,7 @@ const install = ({ globalConfig, open, close }) => {
             maxHeight: pluginConfig.maxHeight,
             onSuccess: pluginConfig.onSuccess,
             beforeClose: pluginConfig.beforeClose,
-            onClose: pluginConfig.onClose
+            onClose: onClose
         }
 
         if (pluginConfig.onSuccess === undefined) {
@@ -93,17 +116,13 @@ const install = ({ globalConfig, open, close }) => {
             delete config.beforeClose
         }
 
-        if (pluginConfig.onClose === undefined) {
-            delete config.onClose
-        }
-
         return open(config)
     }
 
-    return alert
+    return confirm
 }
 
 export default {
-    name: 'alert',
+    name: 'confirm',
     install
 }

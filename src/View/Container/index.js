@@ -82,10 +82,10 @@ class Container extends SuperView {
             width = size && size.width ? size.width : getPX(computedStyle['width'], rootFontSize, winWidth),
             height = size && size.height ? size.height : getPX(computedStyle['height'], rootFontSize, winHeight)
 
-        console.log('size: ', size)
-        console.log('height: ', height)
-        console.log('minHeight: ', minHeight)
-        console.log('maxHeight: ', maxHeight)
+        // console.log('size: ', size)
+        // console.log('height: ', height)
+        // console.log('minHeight: ', minHeight)
+        // console.log('maxHeight: ', maxHeight)
         width = Math.max(minWidth, Math.min(width, maxWidth))
         height = Math.max(minHeight, Math.min(height, maxHeight))
 

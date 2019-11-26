@@ -1,0 +1,62 @@
+@import './color.styl'
+.popup-confirm
+	height 100%
+	border-radius 2px
+	box-shadow 1px 1px 50px 0 rgba(0, 0, 0, 0.3)
+	background-color #FFFFFF
+	overflow hidden
+.popup-confirm-header
+	height 44px
+	box-sizing border-box
+	background-color #F8F8F8
+	// box-shadow 0 -3px 5px 0 #000000
+	border-bottom 1px solid #EEEEEE
+.popup-confirm-title
+	height 100%
+	padding 0 20px
+	line-height 44px
+	font-size 14px
+	white-space nowrap
+	text-overflow ellipsis
+	overflow hidden
+.popup-confirm-body
+	height calc(100% - 104px)
+	padding 20px
+	word-break break-all
+	box-sizing border-box
+	font-size 14px
+	overflow-x hidden
+	overflow-y auto
+.popup-confirm-footer
+	height 60px
+	box-sizing border-box
+	// border-top 1px solid #EEEEEE
+	text-align right
+.popup-confirm-button
+	height 36px
+	margin 12px
+	padding 0 20px
+	line-height 36px
+	border none
+	border-radius 2px
+	outline none
+	color #FFFFFF
+	font-size 14px
+	box-sizing border-box
+	background-color color-button
+	cursor pointer
+	&:hover
+		background-color color-button + #111111
+	&:active, &:focus
+		background-color color-button - #111111
+	&.popup-confirm-button-plain
+		line-height 34px
+		border 1px solid color-button
+		color color-button-plain-text
+		border-color color-button-plain-border
+		background-color #FFFFFF
+		&:hover, &:active, &:focus
+			color color-button-plain-text + #111111
+			border-color color-button-plain-border - #111111
+.popup-confirm-button+.popup-confirm-button
+	margin-left 0

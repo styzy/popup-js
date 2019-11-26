@@ -32,6 +32,8 @@
         <button type="button" onclick="message()">message</button>
         <h3>alert</h3>
         <button type="button" onclick="_alert()">alert</button>
+        <h3>confirm</h3>
+        <button type="button" onclick="_confirm()">confirm</button>
         <h3>dialog</h3>
         <button type="button" onclick="dialog()">dialog</button>
     </div>
@@ -100,11 +102,20 @@
                 })
             }
 
+            window._confirm = function() {
+                popup.confirm({
+                    content: '这是一条确认信息',
+                    onClose: function(isTrue) {
+                        console.log('isTrue: ', isTrue);
+                    }
+                })
+            }
+
             window.dialog = function() {
                 popup.dialog({
                     title: '标题',
                     url: '/',
-                    // url: 'http://baidu.com',
+                    url: 'http://baidu.com',
                     // url: 'http://127.0.0.1:5502/',
                     // content: '<div style="height:800px;">link</div>',
                     // content: document.querySelector('button'),

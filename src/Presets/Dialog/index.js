@@ -15,6 +15,7 @@ const install = ({ globalConfig, open, close }) => {
         let pluginConfig = new Config(rules, customConfig),
             content = null,
             header = null,
+            loading = null,
             containerResize = null
 
         if (pluginConfig.title === true) {
@@ -54,8 +55,8 @@ const install = ({ globalConfig, open, close }) => {
                     if (pluginConfig.closeButton === true) {
                         let el_close_i = document.createElement('i')
                         el_close_i.classList.add(GLOBAL_CONSTANTS.CLASS_NAME.ICONFONT)
+                        el_close_i.classList.add(GLOBAL_CONSTANTS.CLASS_NAME.ICONFONT_CLOSE)
                         el_close_i.classList.add(CONSTANTS.CLASS_NAME.ICONFONT)
-                        el_close_i.classList.add('close')
                         el_close.appendChild(el_close_i)
                     } else if (pluginConfig.closeButton instanceof Function) {
                         el_close.appendChild(pluginConfig.closeButton())
@@ -73,12 +74,23 @@ const install = ({ globalConfig, open, close }) => {
             }
 
             if (pluginConfig.url) {
+                let el_loading = createLoading()
+                loading = el_loading
+                el_body.appendChild(el_loading)
+
                 if (typeof pluginConfig.url === 'string') {
                     pluginConfig.url = getURL(pluginConfig.url)
                 }
+
                 let el_iframe = document.createElement('iframe')
                 el_iframe.classList.add(CONSTANTS.CLASS_NAME.IFRAME)
-                el_iframe.addEventListener('load', iframeLoadHandler)
+                el_iframe.addEventListener('load', () => {
+                    iframeLoadHandler.call(el_iframe)
+                    el_loading.classList.remove(CONSTANTS.CLASS_NAME.LOADING_SHOW)
+                    window.setTimeout(() => {
+                        el_body.removeChild(el_loading)
+                    }, 500)
+                })
                 el_iframe.src = pluginConfig.url.href
                 el_body.appendChild(el_iframe)
             }
@@ -100,7 +112,60 @@ const install = ({ globalConfig, open, close }) => {
             content = el_body
 
             return el
+
+            function createLoading() {
+                let el_loading = document.createElement('div'),
+                    el_i = document.createElement('i')
+                el_loading.classList.add(CONSTANTS.CLASS_NAME.LOADING)
+                el_i.classList.add(GLOBAL_CONSTANTS.CLASS_NAME.ICONFONT)
+                el_i.classList.add(GLOBAL_CONSTANTS.CLASS_NAME.ICONFONT_LOADING)
+                el_i.classList.add(CONSTANTS.CLASS_NAME.ICONFONT)
+                el_loading.appendChild(el_i)
+                return el_loading
+            }
         }
+
+        const onSuccess = id => {
+            if (loading) {
+                loading.classList.add(CONSTANTS.CLASS_NAME.LOADING_SHOW)
+            }
+            if (pluginConfig.onSuccess) {
+                return pluginConfig.onSuccess(id, content, iframeLoadHandler)
+            } else {
+                return null
+            }
+        }
+
+        const beforeClose = id => {
+            if (pluginConfig.beforeClose) {
+                return pluginConfig.beforeClose(id, content)
+            } else {
+                return true
+            }
+        }
+
+        const onClose = id => {
+            if (pluginConfig.onClose) {
+                return pluginConfig.onClose(id)
+            } else {
+                return null
+            }
+        }
+
+        return open({
+            content: render,
+            marker: pluginConfig.marker,
+            anchor: pluginConfig.anchor,
+            width: pluginConfig.width,
+            height: pluginConfig.height,
+            minWidth: pluginConfig.minWidth,
+            minHeight: pluginConfig.minHeight,
+            maxWidth: pluginConfig.maxWidth,
+            maxHeight: pluginConfig.maxHeight,
+            onSuccess: onSuccess,
+            beforeClose: beforeClose,
+            onClose: onClose
+        })
 
         function iframeLoadHandler() {
             this.removeEventListener('load', iframeLoadHandler)
@@ -145,53 +210,14 @@ const install = ({ globalConfig, open, close }) => {
             }
         }
 
-        const onSuccess = id => {
-            if (pluginConfig.onSuccess) {
-                return pluginConfig.onSuccess(id, content, iframeLoadHandler)
-            } else {
-                return null
-            }
+        function getURL(url) {
+            let el = document.createElement('a')
+            el.href = url
+            return new URL(el.href)
         }
-
-        const beforeClose = id => {
-            if (pluginConfig.beforeClose) {
-                return pluginConfig.beforeClose(id, content)
-            } else {
-                return true
-            }
-        }
-
-        const onClose = id => {
-            if (pluginConfig.onClose) {
-                return pluginConfig.onClose(id)
-            } else {
-                return null
-            }
-        }
-
-        return open({
-            content: render,
-            marker: pluginConfig.marker,
-            anchor: pluginConfig.anchor,
-            width: pluginConfig.width,
-            height: pluginConfig.height,
-            minWidth: pluginConfig.minWidth,
-            minHeight: pluginConfig.minHeight,
-            maxWidth: pluginConfig.maxWidth,
-            maxHeight: pluginConfig.maxHeight,
-            onSuccess: onSuccess,
-            beforeClose: beforeClose,
-            onClose: onClose
-        })
     }
 
     return dialog
-}
-
-function getURL(url) {
-    let el = document.createElement('a')
-    el.href = url
-    return new URL(el.href)
 }
 
 export default {

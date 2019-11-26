@@ -9,5 +9,14 @@ i.popup-iconfont
 	font-style normal
 	-webkit-font-smoothing antialiased
 	-moz-osx-font-smoothing grayscale
-	&.close:after
+	&.popup-iconfont-close:after
 		content '\e60f'
+	&.popup-iconfont-loading
+		animation rotate 1s linear infinite
+		&:after
+			content '\e614'
+@keyframes rotate
+	from
+		transform rotate(0)
+	to
+		transform rotate(360deg)

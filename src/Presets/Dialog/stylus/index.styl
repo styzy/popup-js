@@ -37,6 +37,7 @@
 		i.popup-dialog-iconfont
 			color #FFFFFF
 .popup-dialog-body
+	position relative
 	height calc(100% - 40px)
 	overflow-y auto
 	iframe
@@ -45,3 +46,26 @@
 		height 100%
 		border 0
 		box-sizing border-box
+.popup-dialog-loading
+	position absolute
+	top -30px
+	left 50%
+	margin-top -15px
+	margin-left -15px
+	width 30px
+	height 30px
+	padding 5px
+	border-radius 40px
+	box-sizing border-box
+	background-color rgba(0, 0, 0, 0.3)
+	z-index 1
+	transition 0.5s
+	i.popup-dialog-iconfont
+		display block
+		line-height 20px
+		font-size 20px
+		color #FFFFFF
+		&:after
+			display block
+.popup-dialog-loading-show
+	top 50px
