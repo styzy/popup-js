@@ -1,8 +1,8 @@
 const CONSTANTS = {
 	// 版本号
-	VERSION: '1.0.0',
+	VERSION: '1.0.1',
 	// devMode时window挂载数据名
-	DEV_MODE_WINDOW_DATA_NAME: 'popupDevData',
+	DEV_MODE_WINDOW_DATA_NAME: '__POPUP_DEV_DATA__',
 	CLASS_NAME: {
 		FADE_IN: 'popup-fade-in',
 		FADE_OUT: 'popup-fade-out',

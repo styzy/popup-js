@@ -4,9 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>
-			<%= htmlWebpackPlugin.options.title %>
-		</title>
+		<title><%= htmlWebpackPlugin.options.title %></title>
 		<style>
 			.demo {
 				text-align: center;
@@ -113,6 +111,9 @@
 				window.dialog = function () {
 					popup.dialog({
 						title: '标题',
+						// title: false,
+						width: '500px',
+						height: '500px',
 						url: '/',
 						url: 'http://baidu.com',
 						// url: 'http://127.0.0.1:5502/',

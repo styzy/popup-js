@@ -71,6 +71,8 @@ const install = ({ globalConfig, open, close }) => {
 
 				el.appendChild(el_header)
 				header = el_header
+			} else {
+				el_body.classList.add(CONSTANTS.CLASS_NAME.BODY_FULL)
 			}
 
 			if (pluginConfig.url) {
